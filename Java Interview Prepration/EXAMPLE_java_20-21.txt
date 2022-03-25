@@ -1,0 +1,320 @@
+JAVA INTERVIEW PREPRATION CODES IN *****20 th AND 21 th *********SLIDES
+EXAMPLE - 1
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+class Shape
+{
+    private static String name="Polygon";
+    static class Point
+    {
+
+        public Point(int red, int green, int blue) {
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+        }
+        public String toString()
+        {
+            String str=name;
+            return "red:"+red+",green:"+green+",blue:"+blue;
+        }
+        private int red,green,blue;
+        
+    }
+}
+
+public class Example1 {
+    public static void main(String[] args) {
+        
+        Shape.Point p=new Shape.Point(100,150,200);
+        System.out.println(p);
+    }
+}
+
+###########################################################################
+
+EXMPLE - 2
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+class Voter
+{
+    private String name;
+    private int age;
+    
+    private Voter(String name,int age)
+    {
+        if(age>=18)
+        {
+        this.name=name;
+        this.age=age;
+        }
+    }
+    public static class VoterInstance
+            {
+    public static Voter buildVoter(String name,int age)
+    {
+       Voter v=null;
+        if(age>=18)
+        {
+          v=new Voter(name,age);
+        }
+        
+            return v;
+    }
+}
+    public String toString()
+    {
+        return "Voter details\nname:"+name+",age:"+age;
+    }
+}
+public class Example2 {
+    public static void main(String[] args) {
+        Voter v1=Voter.VoterInstance.buildVoter("Ravi",19);
+        Voter v2=Voter.VoterInstance.buildVoter("Gagan",15);
+        System.out.println(v1);
+        System.out.println(v2);
+    }
+}
+
+###########################################################################
+
+EXMPLE - 3
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+class Circle {
+class Point {
+
+private int xPos;
+private int yPos;
+public Point(int x, int y) {
+xPos = x;
+yPos = y;
+}
+public String toString() {
+return "(" + xPos + "," + yPos + ")";
+}
+}
+private Point center;
+private int radius;
+public Circle(int x, int y, int r) {
+center = new Point(x, y);
+radius = r;
+}
+public String toString() {
+return "mid point = " + center + " and radius = " + radius;
+}
+}
+public class Example3 {
+    public static void main(String[] args) {
+        Circle obj=new Circle(10,20,30);
+        System.out.println(obj);
+    }
+}
+
+###########################################################################
+
+EXMPLE - 4
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+class Computer
+{
+    private String HDD;
+    private String RAM;
+    private boolean isGraphicsCardEnabled;
+    private boolean isBluetoothEnabled;
+    private Computer(ComputerBuilder cb)
+    {
+        this.HDD=cb.HDD;
+        this.RAM=cb.RAM;
+        this.isBluetoothEnabled=cb.isBluetoothEnabled;
+        this.isGraphicsCardEnabled=cb.isGraphicsCardEnabled;
+        
+    }
+    public String toString()
+    {
+        return "HDD:"+HDD+"\nRAM:"+RAM+
+                "\ngraphicscardenabled:"+
+                this.isGraphicsCardEnabled+"\nbluetoothenabled:"+this.isBluetoothEnabled;
+    }
+    
+    static class ComputerBuilder
+    {
+        private String HDD;
+        private String RAM;
+        private boolean isGraphicsCardEnabled;
+        private boolean isBluetoothEnabled;
+        public ComputerBuilder(String HDD,String RAM)
+        {
+            this.HDD=HDD;
+            this.RAM=RAM;
+        }
+        public ComputerBuilder setGraphicsCard(boolean present)
+        {
+            this.isGraphicsCardEnabled=present;
+            return this;
+            
+        }
+        
+        public ComputerBuilder setBluetooth(boolean present)
+        {
+            this.isBluetoothEnabled=present;
+            return this;
+        }
+        public Computer build()
+        {
+            Computer comp=new Computer(this);
+            return comp;
+        }
+    }
+    
+    
+}
+public class Example4 {
+    public static void main(String[] args) {
+        Computer dell=new Computer
+                .ComputerBuilder("1TB", "1 GB")
+                .setBluetooth(true)
+                .setGraphicsCard(false)
+                .build();
+        System.out.println(dell);
+    }
+}
+
+##########################################################################
+
+EXMPLE - 5
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+class MyCircle
+{
+    private int rad;
+    private Point p;
+    public  MyCircle(int xpos,int ypos,int rad)
+    {
+        this.rad=rad;
+        p=new Point(xpos,ypos);
+    }
+    
+    public String toString()
+    {
+        String str="xpos="+p.xpos+"ypos="+p.ypos+"rad="+rad;
+        return str;
+    }
+    class Point
+    {
+        private int xpos,ypos;
+        public Point(int xpos,int ypos)
+        {
+            this.xpos=xpos;
+            this.ypos=ypos;
+        }
+//        public String toString()
+//        {
+//            return "rad="+rad+",xpos="+xpos+",ypos="+ypos;
+//        }
+    }
+    
+}
+public class Example5 {
+    public static void main(String[] args) {
+        MyCircle obj=new MyCircle(10,20,30);
+        System.out.println(obj);
+    }
+}
+
+##########################################################################
+
+EXAMPLE - 6
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+
+class Outer
+{
+    int x=10;
+     class Inner
+    {
+        int x=20;
+        public void show()
+        {
+            System.out.println(Outer.this.x);
+            System.out.println(this.x);
+        }
+    }
+}
+
+
+public class Example6 {
+    public static void main(String[] args) {
+        Outer.Inner obj=new Outer().new Inner();
+        obj.show();
+    }
+}
+
+###########################################################################
+
+EXAMPLE - 7
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package in.scabhopsl.innerclass;
+
+class A
+{
+    int y=20;
+    public void m1()
+    {
+        final int x=10;
+        class Sachin
+        {
+            int z=30;
+            public void show()
+            {
+                System.out.println(y);
+                System.out.println(z);
+                System.out.println(x);
+            }
+        }
+        Sachin s=new Sachin();
+        s.show();
+    }
+}
+public class Example7 {
+    public static void main(String[] args) {
+        A obj=new A();
+        obj.m1();
+    }
+}
+
+####################################################################
